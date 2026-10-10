@@ -1,0 +1,22 @@
+# Configuração placeholder do hardware. Quando montarmos a estrutura do braço,
+# preencheremos esses valores. Provavelmente também precisaremos adicionar mais
+# valores.
+camera:
+  device: "<camera-device>"
+  mounting_height_m: null
+  calibration_file: "<local-calibration-file>"
+
+workspace:
+  destination: null
+  resting_position: null
+
+arm:
+  model: "<arm-model>"
+  gpio_profile: "<gpio-profile>"
+
+inference:
+  backend: "<segmentation-backend>"
+  model: "<model-name>"
+
+runtime:
+  stop_command: "stop"
