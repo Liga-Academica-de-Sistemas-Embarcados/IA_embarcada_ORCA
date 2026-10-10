@@ -1,0 +1,27 @@
+# Build and generated files
+build/
+install/
+log/
+coverage/
+dist/
+
+# Python caches and environments
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# IDE and operating-system files
+.vscode/
+.idea/
+.DS_Store
+
+# Local configuration and secrets
+*.local
+*.secret
+!.env.example
+
+# Runtime artifacts
+*.log
+*.bag
+*.db
