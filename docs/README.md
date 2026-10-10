@@ -8,5 +8,10 @@
   instalação real.
 - [Desenvolvimento](development.md) descreve o fluxo planejado de
   desenvolvimento local e em hardware.
-- [diagrams/ORCAdiagram.png](diagrams/ORCAdiagram.png) é o diagrama de
-  arquitetura original.
+
+## Diagrama do projeto
+
+![Diagrama da arquitetura do Projeto ORCA](diagrams/ORCAdiagram.png)
+
+O arquivo original está disponível em
+[diagrams/ORCAdiagram.png](diagrams/ORCAdiagram.png).
