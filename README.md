@@ -46,6 +46,13 @@ Consulte [docs/architecture.md](docs/architecture.md) para conhecer os
 contratos dos componentes e [docs/operation.md](docs/operation.md) para o
 comportamento esperado em tempo de execução.
 
+## Diagrama do projeto
+
+![Diagrama da arquitetura do Projeto ORCA](docs/diagrams/ORCAdiagram.png)
+
+O diagrama completo da arquitetura também está disponível em
+[docs/diagrams/ORCAdiagram.png](docs/diagrams/ORCAdiagram.png).
+
 ## Pré-requisitos planejados
 
 - ROS 2
