@@ -19,8 +19,8 @@ class inferenceEngine:
                  prompt=None, 
                  threshold=0.2,
                  device="cpu",
-                 backbone_path="checkpoints/mobileclip_s0.pt",
-                 decoder_path="sags/checkpoints/checkpoints/sags_mobileclip_s0_v2_best.pt"
+                 backbone_path="weights/mobileclip_s0.pt",
+                 decoder_path= "weights/sags_mobileclip_s0_v2_best.pt"
         ):
         state = torch.load(decoder_path, map_location="cpu", weights_only=False)
         self.config = SAGSConfig(**state["config"])
