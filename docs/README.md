@@ -8,6 +8,9 @@
   instalação real.
 - [Desenvolvimento](development.md) descreve o fluxo planejado de
   desenvolvimento local e em hardware.
+- [ZeroShotDet](../src/arm_client/SegmentImage/ZeroShotDet/README.md)
+  descreve o backend MobileCLIP/SAGS, os checkpoints e o teste interativo de
+  webcam.
 
 ## Diagrama do projeto
 

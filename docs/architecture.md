@@ -13,7 +13,10 @@ câmera e controla o estado pausado acionado pelo comando exato `stop`.
 O cliente realiza a percepção e traduz os resultados da imagem em alvos de
 movimento:
 
-- `SegmentImage` produz uma máscara para os objetos correspondentes ao comando.
+- `SegmentImage` produz uma máscara e caixas delimitadoras para os objetos
+  correspondentes ao comando. A implementação atual usa o detector zero-shot
+  MobileCLIP/SAGS descrito em
+  [`src/arm_client/SegmentImage/ZeroShotDet/README.md`](../src/arm_client/SegmentImage/ZeroShotDet/README.md).
 - `FindPickUpPixels` converte uma máscara e pixels brutos em um ou mais valores
   `ObjPixelCoordinates::PixCoords`.
 - `PixelToCoords` converte coordenadas de pixels em coordenadas cartesianas
@@ -56,7 +59,7 @@ UserInterface + ImageProvider
               │ prompt + frame
               ▼
         SegmentImage
-              │ mask
+              │ mask + bounding boxes
               ▼
       FindPickUpPixels
               │ pixel coordinates
@@ -80,3 +83,6 @@ UserInterface + ImageProvider
 2. Mantenha a calibração e as posições de destino na configuração, não no
    código.
 3. Torne a posição de repouso um estado de movimento explícito e recuperável.
+4. Mantenha os pesos do modelo fora do fluxo de código quando forem
+   específicos de uma máquina; os checkpoints de desenvolvimento existentes
+   ficam em `src/arm_client/SegmentImage/weights/`.

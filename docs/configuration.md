@@ -29,10 +29,20 @@ A configuração inicial deve abranger:
 
 ## Inferência
 
-- backend/modelo de segmentação;
-- limiares de confiança e da máscara;
+- backend/modelo de segmentação. A implementação atual usa MobileCLIP como
+  backbone congelado e um decoder SAGS treinável;
+- caminhos dos checkpoints do backbone e do decoder;
+- dispositivo de execução (`cpu` ou `cuda`);
+- tamanho da imagem de entrada e limiar da máscara;
 - quantidade máxima de objetos por comando;
 - comportamento quando nenhum objeto correspondente for encontrado.
+
+Para o teste interativo atual, esses parâmetros podem ser informados pela
+linha de comando. Os caminhos padrão são relativos ao repositório e apontam
+para:
+
+- `src/arm_client/SegmentImage/weights/mobileclip_s0.pt`;
+- `src/arm_client/SegmentImage/weights/sags_mobileclip_s0_v2.pt`.
 
 ## Tempo de execução
 
