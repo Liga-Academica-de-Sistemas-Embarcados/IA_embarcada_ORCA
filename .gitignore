@@ -29,3 +29,4 @@ venv/
 /in_domain
 /out_domain
 /src/arm_client/SegmentImage/weights
+/images
