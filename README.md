@@ -11,8 +11,10 @@ sistema é pausado e permanece pausado até que outro comando seja informado.
 
 ## Status do projeto
 
-Este repositório atualmente contém a estrutura do projeto e a documentação do
-sistema. A implementação em tempo de execução será adicionada gradualmente.
+O repositório contém a estrutura do sistema e uma implementação inicial da
+percepção zero-shot no cliente do braço. O detector atual e o smoke test de
+webcam são componentes de desenvolvimento; a integração completa com
+`InputHandler`, planejamento de movimento e hardware ainda está em evolução.
 
 ## Estrutura do repositório
 
@@ -30,6 +32,11 @@ sistema. A implementação em tempo de execução será adicionada gradualmente.
 ├── LICENSE
 └── README.md
 ```
+
+Consulte [`src/arm_client/SegmentImage/ZeroShotDet/README.md`](src/arm_client/SegmentImage/ZeroShotDet/README.md)
+para a arquitetura do detector zero-shot e
+[`tests/arm_client/test_zero_shot_webcam.py`](tests/arm_client/test_zero_shot_webcam.py)
+para o teste interativo de câmera.
 
 ## Fluxo geral
 
@@ -53,12 +60,13 @@ comportamento esperado em tempo de execução.
 O diagrama completo da arquitetura também está disponível em
 [docs/diagrams/ORCAdiagram.png](docs/diagrams/ORCAdiagram.png).
 
-## Pré-requisitos planejados
+## Pré-requisitos planejados e atuais
 
 - ROS 2
 - Um braço robótico compatível e uma interface GPIO/PWM
 - Uma câmera montada em altura fixa
 - Um backend compatível de segmentação/inferência zero-shot
+- Python com PyTorch, OpenCV, NumPy e `timm` para executar o detector atual
 
 As versões exatas e as instruções específicas do hardware serão documentadas
 quando a implementação for definida.
