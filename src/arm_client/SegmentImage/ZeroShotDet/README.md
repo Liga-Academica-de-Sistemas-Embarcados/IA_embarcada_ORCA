@@ -107,6 +107,17 @@ Pressione `q` ou `Esc` para encerrar. A execução requer uma câmera acessível
 um display para as janelas OpenCV, os dois checkpoints e as dependências
 Python do MobileCLIP.
 
+Para processar uma imagem única, use o script correspondente:
+
+```bash
+python3 tests/arm_client/test_zero_shot_image.py \
+   path/to/image.jpg \
+   --prompt bottle \
+   --output detected.jpg
+```
+
+O resultado também pode ser executado sem janela gráfica com `--no-display`.
+
 ## Limitações conhecidas
 
 - O pré-processamento atual redimensiona o quadro para um quadrado de

@@ -30,3 +30,15 @@ O script usa os checkpoints padrão em
 `src/arm_client/SegmentImage/weights/`, mantém o embedding do prompt em
 cache e exibe as caixas detectadas. O parâmetro `--device cuda` pode ser
 usado quando PyTorch e os pesos estiverem configurados para GPU.
+
+Para executar a inferência em uma imagem:
+
+```bash
+python3 tests/arm_client/test_zero_shot_image.py \
+  path/to/image.jpg \
+  --prompt bottle \
+  --threshold 0.5 \
+  --output detected.jpg
+```
+
+Use `--no-display` em ambientes sem uma janela gráfica.
