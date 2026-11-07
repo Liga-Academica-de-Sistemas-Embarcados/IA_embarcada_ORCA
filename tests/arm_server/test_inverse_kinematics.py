@@ -87,6 +87,32 @@ def test_inverse_kinematics_reconstructs_target_position(arm):
 def test_inverse_kinematics_accepts_cartesian_coordinates(arm):
     target = [0.4, 1.8, 0.6]
 
-    result = arm.compute_IK(target, initial_angles=[0.0, 0.0, 0.0, 0.0])
+    result = arm.compute_IK(target, initial_angles=[0.0, 1.0, -1.0, 0.0])
 
     assert result is not None
+
+
+def test_inverse_kinematics_keeps_all_links_above_ground(arm):
+    target_angles = np.array([0.4, 0.6, -0.3, 0.2])
+    target_position = arm.compute_FK(target_angles)
+
+    solved_angles = arm.compute_IK(target_position, initial_angles=target_angles)
+
+    np.testing.assert_array_less(-1e-6, arm._planar_heights(solved_angles[1:]))
+
+
+def test_inverse_kinematics_rejects_target_below_ground(arm):
+    with pytest.raises(ValueError, match="chão"):
+        arm.compute_IK([0.0, 1.0, -0.1], initial_angles=[0.0, 0.5, 0.0, 0.0])
+
+
+def test_mirrored_planar_configuration_preserves_target_position(arm):
+    angles = np.array([0.0, 0.7, -0.4, 0.2])
+    target = np.array([np.hypot(*arm.compute_FK(angles)[:2]), arm.compute_FK(angles)[2]])
+    mirrored = arm._mirror_planar_angles(angles[1:], target)
+
+    np.testing.assert_allclose(
+        arm._planar_position(mirrored),
+        arm._planar_position(angles[1:]),
+        atol=1e-12,
+    )

@@ -45,7 +45,7 @@ def parse_arguments():
         nargs=4,
         type=float,
         metavar=("BASE", "JOINT1", "JOINT2", "JOINT3"),
-        help="Initial joint angles in degrees (default: all zero)",
+        help="Initial joint angles in degrees (default: 0 57 -57 0)",
     )
     parser.add_argument(
         "--initial-only",
@@ -97,7 +97,11 @@ def plot_arm(arm, angles, target=None, title="Robot configuration"):
 
 def main():
     args = parse_arguments()
-    initial_angles = np.zeros(4) if args.initial_angles is None else np.radians(args.initial_angles)
+    initial_angles = (
+        np.radians([0.0, 57.0, -57.0, 0.0])
+        if args.initial_angles is None
+        else np.radians(args.initial_angles)
+    )
     arm = arm4DOF_kinematics([1.0, 1.0, 1.0])
 
     if args.initial_only:
