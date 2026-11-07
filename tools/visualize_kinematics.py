@@ -47,6 +47,11 @@ def parse_arguments():
         metavar=("BASE", "JOINT1", "JOINT2", "JOINT3"),
         help="Initial joint angles in degrees (default: all zero)",
     )
+    parser.add_argument(
+        "--initial-only",
+        action="store_true",
+        help="Display the initial robot configuration without solving IK",
+    )
     return parser.parse_args()
 
 
@@ -63,7 +68,7 @@ def read_target(args):
     ])
 
 
-def plot_arm(arm, angles, target):
+def plot_arm(arm, angles, target=None, title="Robot configuration"):
     points = joint_positions(arm, angles)
     reached = np.asarray(arm.compute_FK(angles))
 
@@ -73,8 +78,9 @@ def plot_arm(arm, angles, target):
         points[:, 0], points[:, 1], points[:, 2],
         "o-", linewidth=3, label="arm",
     )
-    axis.scatter(*target, color="tab:red", s=70, label="target")
-    axis.scatter(*reached, color="tab:green", s=50, label="reached")
+    if target is not None:
+        axis.scatter(*target, color="tab:red", s=70, label="target")
+        axis.scatter(*reached, color="tab:green", s=50, label="reached")
 
     extent = arm.l1 + arm.l2 + arm.l3
     axis.set_xlim(-extent, extent)
@@ -84,17 +90,23 @@ def plot_arm(arm, angles, target):
     axis.set_xlabel("x (m)")
     axis.set_ylabel("y (m)")
     axis.set_zlabel("z (m)")
-    axis.set_title("Jacobian inverse kinematics")
+    axis.set_title(title)
     axis.legend()
     plt.show()
 
 
 def main():
     args = parse_arguments()
-    target = read_target(args)
     initial_angles = np.zeros(4) if args.initial_angles is None else np.radians(args.initial_angles)
     arm = arm4DOF_kinematics([1.0, 1.0, 1.0])
 
+    if args.initial_only:
+        print("Initial joint angles (degrees):", np.degrees(initial_angles))
+        print("Initial position (m):          ", arm.compute_FK(initial_angles))
+        plot_arm(arm, initial_angles, title="Initial robot configuration")
+        return
+
+    target = read_target(args)
     try:
         angles = arm.compute_IK(target, initial_angles=initial_angles)
     except ValueError as error:
