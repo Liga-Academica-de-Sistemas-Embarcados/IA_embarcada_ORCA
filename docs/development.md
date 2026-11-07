@@ -34,4 +34,46 @@ Pressione `q` ou `Esc` para sair. O teste não substitui testes automatizados:
 ele exige uma câmera, pesos locais, um ambiente gráfico e uma instalação
 compatível das dependências de inferência.
 
+## Testes de cinemática do braço
+
+Os testes de cinemática verificam a cinemática direta, a recuperação da
+posição pela cinemática inversa, limites do espaço de trabalho e soluções
+seguras em relação ao plano do chão:
+
+```bash
+pytest -q tests/arm_server/test_inverse_kinematics.py
+```
+
+## Visualização da cinemática
+
+O visualizador 3D usa valores temporários de um metro para os três elos.
+Instale `numpy` e `matplotlib` no ambiente Python ativo e execute:
+
+```bash
+python tools/visualize_kinematics.py
+```
+
+O programa solicitará `x`, `y` e `z` em metros. Também é possível informar o
+alvo diretamente:
+
+```bash
+python tools/visualize_kinematics.py --x 1 --y 1 --z 0.1
+```
+
+Os quatro ângulos iniciais podem ser passados em graus. Eles influenciam qual
+solução analítica válida será escolhida:
+
+```bash
+python tools/visualize_kinematics.py \
+  --x 1 --y 1 --z 0.1 \
+  --initial-angles 180 90 90 0
+```
+
+Para exibir apenas o estado inicial do braço, use `--initial-only`:
+
+```bash
+python tools/visualize_kinematics.py \
+  --initial-only \
+  --initial-angles 0 30 -45 15
+```
    
