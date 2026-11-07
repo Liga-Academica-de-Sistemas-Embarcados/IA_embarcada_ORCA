@@ -42,3 +42,27 @@ python3 tests/arm_client/test_zero_shot_image.py \
 ```
 
 Use `--no-display` em ambientes sem uma janela gráfica.
+
+## Testes de cinemática e visualizador 3D
+
+Execute os testes do servidor do braço com:
+
+```bash
+pytest -q tests/arm_server/test_inverse_kinematics.py
+```
+
+O visualizador correspondente está em
+[`tools/visualize_kinematics.py`](../tools/visualize_kinematics.py). Ele usa
+três elos de um metro e aceita uma posição cartesiana em metros:
+
+```bash
+python3 tools/visualize_kinematics.py --x 1 --y 1 --z 0.1
+```
+
+Para visualizar apenas a configuração inicial:
+
+```bash
+python3 tools/visualize_kinematics.py \
+  --initial-only \
+  --initial-angles 0 30 -45 15
+```
