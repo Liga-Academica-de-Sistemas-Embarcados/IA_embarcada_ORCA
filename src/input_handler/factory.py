@@ -9,8 +9,9 @@ class Factory:
         self.interface = interface
         self.prompt = ""
         self.frame = None
-
     def build(self):
+        if self.interface.stop_event.is_set():
+            return False
         ok, frame = self.recieve.capture()
 
         if not ok:
@@ -32,5 +33,5 @@ while InputObj.build():
         pass
     if not cam.show(InputObj.frame):
         break
-
+prompt.stop()
 cam.release_cam()
